@@ -10,12 +10,16 @@ public class SqliteManager {
 		
 	private SqliteManager(Context context) {
 		openHelper = new MySqliteOpenHelper(context, "musicBD", null, 1);
-		if(new SqlVersionManager().isNewVersion()) 
+		if(new SqlVersionManager().isNewVersion())
 			openHelper.upgrade(openHelper.getWritableDatabase());
 	}
 	
 	public static void initBD(Context context) {
 		singleton = new SqliteManager(context);
+	}
+	
+	public static void closeBD() {
+		openHelper.close();
 	}
 	
 	public static SQLiteDatabase getDatabase() throws Exception {
