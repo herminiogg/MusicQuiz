@@ -1,13 +1,16 @@
 package com.ia.musicquiz;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ia.musicquiz.persistence.Song;
 import com.ia.musicquiz.persistence.SqliteManager;
+import com.ia.musicquiz.persistence.dao.SongDao;
 
 public class MainActivity extends Activity {
 
@@ -17,22 +20,24 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		TextView tx = (TextView) findViewById(R.id.texto);
+		
+		SqliteManager.initBD(this);
+		
+		SQLiteDatabase bd;
 		try {
-			SqliteManager.initBD(this);
-			SQLiteDatabase bd = SqliteManager.getDatabase();
-			Cursor c = bd.rawQuery("SELECT titulo,uri FROM cancion", null);
-
-			if (c.moveToFirst()) {
-				do {
-					String titulo = c.getString(0);
-					String uri = c.getString(1);
-					tx.setText(tx.getText().toString() + "\n" + titulo + "\n" + uri);
-				} while (c.moveToNext());
-			}
+			bd = SqliteManager.getDatabase();
+			SongDao dao = new SongDao();
+			dao.setDatabase(bd);
+			Song song = dao.getGenreRandomSong("Rock");
+			tx.setText("Titulo: " + song.getTitulo() + "\nArtista: "
+					+ song.getArtista() + "\nGenero: " + song.getGenero()
+					+ "\nUri: " + song.getUri());
+			MediaPlayer mp = MediaPlayer.create(this, song.getUri());
+			mp.start();
 		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			SqliteManager.closeBD();	
+			Toast.makeText(this, "Error al obtener una cancion", Toast.LENGTH_LONG).show();
+		} finally {			
+			SqliteManager.closeBD();
 		}
 	}
 
