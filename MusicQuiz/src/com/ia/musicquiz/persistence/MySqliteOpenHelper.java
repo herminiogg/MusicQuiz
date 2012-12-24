@@ -9,10 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class MySqliteOpenHelper extends SQLiteOpenHelper {
+	
+	private Context context;
 
 	public MySqliteOpenHelper(Context context, String name,
 			CursorFactory factory, int version) {
 		super(context, name, factory, version);
+		this.context = context;
 	}
 
 	@Override
@@ -33,7 +36,7 @@ public class MySqliteOpenHelper extends SQLiteOpenHelper {
 	private void execSqlScript(SQLiteDatabase db) {
 		SqlIterator iterator;
 		try {
-			iterator = new SqlIterator(new SqlDownloader().getFile());
+			iterator = new SqlIterator(new SqlDownloader(context).getFile());
 			iterator.next(); // salta la linea de version
 			while(iterator.hasNext()) {
 				db.execSQL(iterator.next());

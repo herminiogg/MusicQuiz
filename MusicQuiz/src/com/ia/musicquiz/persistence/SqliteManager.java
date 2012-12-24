@@ -10,7 +10,7 @@ public class SqliteManager {
 		
 	private SqliteManager(Context context) {
 		openHelper = new MySqliteOpenHelper(context, "musicBD", null, 1);
-		if(new SqlVersionManager().isNewVersion())
+		if(new SqlVersionManager(context).isNewVersion())
 			openHelper.upgrade(openHelper.getWritableDatabase());
 	}
 	

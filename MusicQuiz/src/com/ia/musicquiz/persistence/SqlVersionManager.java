@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import android.content.Context;
+
 public class SqlVersionManager {
 	
 	private SqlDownloader downloader;
 	
-	public SqlVersionManager() {
-		this.downloader = new SqlDownloader();
+	public SqlVersionManager(Context context) {
+		this.downloader = new SqlDownloader(context);
 	}
 	
 	public boolean isNewVersion() {
