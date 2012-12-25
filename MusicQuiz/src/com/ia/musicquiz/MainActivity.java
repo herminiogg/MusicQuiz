@@ -14,6 +14,8 @@ import com.ia.musicquiz.persistence.dao.SongDao;
 
 public class MainActivity extends Activity {
 
+	MediaPlayer mp;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class MainActivity extends Activity {
 			tx.setText("Titulo: " + song.getTitulo() + "\nArtista: "
 					+ song.getArtista() + "\nGenero: " + song.getGenero()
 					+ "\nUri: " + song.getUri());
-			MediaPlayer mp = MediaPlayer.create(this, song.getUri());
+			mp = MediaPlayer.create(this, song.getUri());
 			mp.start();
 		} catch (Exception e) {
 			Toast.makeText(this, "Error al obtener una cancion", Toast.LENGTH_LONG).show();
@@ -48,4 +50,10 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	protected void onPause() {
+		mp.stop();
+		finish();
+		super.onPause();
+	}
 }
