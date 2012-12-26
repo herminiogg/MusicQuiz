@@ -3,6 +3,8 @@ package com.ia.musicquiz;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ia.musicquiz.persistence.SqliteManager;
@@ -23,6 +26,10 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 
 	private MediaPlayer mp;
 	private Song cancionElegida;
+	private TextView tiempo;
+	private Timer timer;
+	private final static int DURACION = 30;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,8 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_pregunta_single);
+		
+		tiempo = (TextView) this.findViewById(R.id.textTiempo);
 
 		iniciarJuego();
 
@@ -47,8 +56,9 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 
 			mp = MediaPlayer.create(this, cancionElegida.getUri());
 			mp.start();
-		} else
-			finish();
+			iniciarHiloTiempoRestante();
+				
+		};
 	}
 
 	private List<Song> getCanciones() {
@@ -128,6 +138,7 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 
 	private void reiniciarInterfaz() {
 		mp.reset();
+		timer.cancel();
 		List<Song> canciones = getCanciones();
 		if (canciones != null) {
 			cancionElegida = canciones.get(new Random().nextInt(3));
@@ -146,7 +157,29 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 
 			mp = MediaPlayer.create(this, cancionElegida.getUri());
 			mp.start();
+			iniciarHiloTiempoRestante();
+			
 		} else
 			finish();
 	}
+	
+	private void iniciarHiloTiempoRestante() {
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				final int tiempoRestante = DURACION*1000 - mp.getCurrentPosition();
+				 PreguntaSingleActivity.this.runOnUiThread(new Runnable() {@Override public void run()
+				 {
+					 tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+
+		    					tiempoRestante/1000+getResources().getText(R.string.segundos).toString());
+				 }});
+    			
+			}
+		}, 1000, 1000);
+	}
+	
+	
 }
+
