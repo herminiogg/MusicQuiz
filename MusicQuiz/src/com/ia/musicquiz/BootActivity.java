@@ -37,10 +37,26 @@ public class BootActivity extends Activity {
 
 	public void iniciarJuego() {
 		SqliteManager.initBD(this);
-		for (int i = 0; i < 100000; i++)
-			System.out.println(i); //Exar tiempo para ver que se muestra el logo mientras tanto.
-		Intent ventanaInicial = new Intent(this, MenuPrincipalActivity.class);
-		startActivity(ventanaInicial);
+	     Thread splashThread = new Thread() {
+	         @Override
+	         public void run() {
+	            try {
+	               int waited = 0;
+	               while (waited < 3000) {
+	                  sleep(100);
+	                  waited += 100;
+	               }
+	            } catch (InterruptedException e) {
+	               ;// do nothing
+	            } finally {
+	               finish();
+	               Intent ventanaInicial = new Intent(BootActivity.this, MenuPrincipalActivity.class);
+	               startActivity(ventanaInicial);
+	               
+	            }
+	         }
+	      };
+	      splashThread.start();
 	}
 
 }
