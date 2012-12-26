@@ -26,10 +26,8 @@ public class BootActivity extends Activity {
 	// Lanza el metodo iniciarJuego cuando ya es visible la actividad.
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		if (hasFocus) {
-			setVisible(true);
+		if (hasFocus)
 			iniciarJuego();
-		}
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class BootActivity extends Activity {
 		SqliteManager.initBD(this);
 		for (int i = 0; i < 100000; i++)
 			Log.v("msg", "test");
-		Intent ventanaInicial = new Intent(this, MainActivity.class);
+		Intent ventanaInicial = new Intent(this, MenuPrincipalActivity.class);
 		startActivity(ventanaInicial);
 	}
 
