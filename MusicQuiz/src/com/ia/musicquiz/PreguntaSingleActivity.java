@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -36,38 +35,46 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 
 		setContentView(R.layout.activity_pregunta_single);
 
-		try {
-			List<Song> canciones = getCanciones();
+		iniciarJuego();
+
+	}
+
+	private void iniciarJuego() {
+		List<Song> canciones = getCanciones();
+		if (canciones != null) {
 			cancionElegida = canciones.get(new Random().nextInt(3));
 			asignarCancionesABotones(canciones);
 
 			mp = MediaPlayer.create(this, cancionElegida.getUri());
 			mp.start();
+		} else
+			finish();
+	}
+
+	private List<Song> getCanciones() {
+		try {
+			SQLiteDatabase bd = SqliteManager.getDatabase();
+			SongDao dao = new SongDao();
+			dao.setDatabase(bd);
+
+			List<Song> canciones = new ArrayList<Song>();
+
+			while (canciones.size() < 4) {
+				Song song = dao.getGenreRandomSong("Rock");
+				while (isArtistaRepetido(canciones, song.getArtista()))
+					song = dao.getGenreRandomSong("Rock");
+				canciones.add(song);
+			}
+			return canciones;
 		} catch (Exception e) {
 			Toast.makeText(this, "Error al obtener una cancion",
 					Toast.LENGTH_LONG).show();
 		} finally {
 			SqliteManager.closeBD();
 		}
+		return null;
 	}
 
-	private List<Song> getCanciones() throws Exception {
-		SQLiteDatabase bd = SqliteManager.getDatabase();
-		SongDao dao = new SongDao();
-		dao.setDatabase(bd);
-		
-		List<Song> canciones = new ArrayList<Song>();
-
-		while (canciones.size() < 4) {
-			Song song = dao.getGenreRandomSong("Rock");
-			while (isArtistaRepetido(canciones, song.getArtista()))
-				song = dao.getGenreRandomSong("Rock");
-			canciones.add(song);
-		}
-
-		return canciones;
-	}
-	
 	private boolean isArtistaRepetido(List<Song> canciones, String artista) {
 		for (Song cancion : canciones) {
 			if (cancion.getArtista().equals(artista))
@@ -76,9 +83,8 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 		return false;
 	}
 
-
 	private void asignarCancionesABotones(List<Song> canciones) {
-		
+
 		Button boton = (Button) findViewById(R.id.btOpcion1);
 		boton.setText(canciones.get(0).getArtista());
 		boton.setOnClickListener(this);
@@ -98,9 +104,14 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 
 	@Override
 	protected void onPause() {
-		mp.stop();
 		finish();
 		super.onPause();
+	}
+	
+	@Override
+	protected void onStop() {
+		mp.reset();
+		super.onStop();
 	}
 
 	@Override
@@ -109,11 +120,33 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 		if (source.getText().toString().equals(cancionElegida.getArtista())) {
 			Toast.makeText(this, "Bien, has acertado", Toast.LENGTH_SHORT)
 					.show();
-			Intent avanzar = new Intent(this, PreguntaSingleActivity.class);
-			startActivity(avanzar);
-		}
-		else 
+			reiniciarInterfaz();
+		} else
 			Toast.makeText(this, "Lo siento, te has confundido",
 					Toast.LENGTH_SHORT).show();
+	}
+
+	private void reiniciarInterfaz() {
+		mp.reset();
+		List<Song> canciones = getCanciones();
+		if (canciones != null) {
+			cancionElegida = canciones.get(new Random().nextInt(3));
+
+			Button boton = (Button) findViewById(R.id.btOpcion1);
+			boton.setText(canciones.get(0).getArtista());
+
+			boton = (Button) findViewById(R.id.btOpcion2);
+			boton.setText(canciones.get(1).getArtista());
+
+			boton = (Button) findViewById(R.id.btOpcion3);
+			boton.setText(canciones.get(2).getArtista());
+
+			boton = (Button) findViewById(R.id.btOpcion4);
+			boton.setText(canciones.get(3).getArtista());
+
+			mp = MediaPlayer.create(this, cancionElegida.getUri());
+			mp.start();
+		} else
+			finish();
 	}
 }

@@ -3,7 +3,6 @@ package com.ia.musicquiz;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -39,7 +38,7 @@ public class BootActivity extends Activity {
 	public void iniciarJuego() {
 		SqliteManager.initBD(this);
 		for (int i = 0; i < 100000; i++)
-			Log.v("msg", "test");
+			System.out.println(i); //Exar tiempo para ver que se muestra el logo mientras tanto.
 		Intent ventanaInicial = new Intent(this, MenuPrincipalActivity.class);
 		startActivity(ventanaInicial);
 	}
