@@ -1,4 +1,4 @@
-package com.ia.musicquiz.persistence;
+package com.ia.musicquiz.persistence.dao;
 
 import android.net.Uri;
 

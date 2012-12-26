@@ -15,8 +15,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.ia.musicquiz.persistence.Song;
 import com.ia.musicquiz.persistence.SqliteManager;
+import com.ia.musicquiz.persistence.dao.Song;
 import com.ia.musicquiz.persistence.dao.SongDao;
 
 public class PreguntaSingleActivity extends Activity implements OnClickListener {

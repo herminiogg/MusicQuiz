@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-import com.ia.musicquiz.persistence.Song;
 
 public class SongDao {
 	
