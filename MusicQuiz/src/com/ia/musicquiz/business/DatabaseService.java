@@ -2,12 +2,13 @@ package com.ia.musicquiz.business;
 
 import java.util.List;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import com.ia.musicquiz.persistence.SqliteManager;
+import com.ia.musicquiz.persistence.dao.ArtistDao;
 import com.ia.musicquiz.persistence.dao.GenreDao;
 import com.ia.musicquiz.persistence.dao.Song;
 import com.ia.musicquiz.persistence.dao.SongDao;
-
-import android.database.sqlite.SQLiteDatabase;
 
 public class DatabaseService {
 	
@@ -27,5 +28,11 @@ public class DatabaseService {
 		GenreDao gd = new GenreDao();
 		gd.setDatabase(bd);
 		return gd.getGenreList();
+	}
+	
+	public List<String> getArtistList() {
+		ArtistDao ad = new ArtistDao();
+		ad.setDatabase(bd);
+		return ad.getArtistList();
 	}
 }

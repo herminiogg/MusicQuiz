@@ -10,5 +10,8 @@
     <string name="salir">Salir</string>
     <string name="title_activity_pregunta_single">PreguntaSinglePlayer</string>
     <string name="pregunta">¿De quién es esta canción?</string>
+    <string name="no_conexion">Se necesita estar conectado a internet para usar la aplicacion</string>
+    <string name="tiempo_restante">Tiempo restante: </string>
+    <string name="segundos"> s</string>
 
 </resources>
