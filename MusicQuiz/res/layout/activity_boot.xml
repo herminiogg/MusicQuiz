@@ -1,0 +1,15 @@
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#FFFFFF"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/logo_de_eii"
+            android:src="@drawable/boot" />
+
+    </FrameLayout>
