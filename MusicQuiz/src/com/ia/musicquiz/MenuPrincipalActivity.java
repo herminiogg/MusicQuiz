@@ -27,7 +27,7 @@ public class MenuPrincipalActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent lanzarJuego = new Intent(MenuPrincipalActivity.this, MainActivity.class);
+				Intent lanzarJuego = new Intent(MenuPrincipalActivity.this, PreguntaSingleActivity.class);
 				startActivity(lanzarJuego);
 			}
 		});
