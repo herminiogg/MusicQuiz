@@ -6,14 +6,11 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +19,7 @@ import com.ia.musicquiz.persistence.SqliteManager;
 import com.ia.musicquiz.persistence.dao.Song;
 import com.ia.musicquiz.persistence.dao.SongDao;
 
-public class PreguntaSingleActivity extends Activity implements OnClickListener {
+public class PreguntaSingleActivity extends ActivityFinishedOnPause implements OnClickListener {
 
 	private MediaPlayer mp;
 	private Song cancionElegida;
@@ -35,11 +32,6 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// FullSreen
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_pregunta_single);
 		
@@ -112,12 +104,6 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 		boton = (Button) findViewById(R.id.btOpcion4);
 		boton.setText(canciones.get(3).getArtista());
 		boton.setOnClickListener(this);
-	}
-
-	@Override
-	protected void onPause() {
-		finish();
-		super.onPause();
 	}
 	
 	@Override
