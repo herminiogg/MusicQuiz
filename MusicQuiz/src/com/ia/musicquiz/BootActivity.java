@@ -22,13 +22,7 @@ public class BootActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_boot);
-	}
-
-	// Lanza el metodo iniciarJuego cuando ya es visible la actividad.
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		if (hasFocus)
-			iniciarJuego();
+		iniciarJuego();
 	}
 
 	@Override
@@ -44,21 +38,21 @@ public class BootActivity extends Activity {
 				@Override
 				public void run() {
 					try {
-						int waited = 0;
+						/*int waited = 0;
 						while (waited < 3000) {
 							sleep(100);
 							waited += 100;
-						}
+						}*/
+						sleep(3000);
 					} catch (InterruptedException e) {
-						;// do nothing
 					} finally {
-						finish();
 						Intent ventanaInicial = new Intent(BootActivity.this, MenuPrincipalActivity.class);
 						startActivity(ventanaInicial);
 					}
 				}
 			};
 			splashThread.start();
+			
 		}
 	}
 	
