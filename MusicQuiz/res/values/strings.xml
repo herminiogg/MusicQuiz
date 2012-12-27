@@ -13,5 +13,6 @@
     <string name="no_conexion">Se necesita estar conectado a internet para usar la aplicacion</string>
     <string name="tiempo_restante">Tiempo restante: </string>
     <string name="segundos"> s</string>
+    <string name="errorbd">Error al acceder a la base de datos</string>
 
 </resources>

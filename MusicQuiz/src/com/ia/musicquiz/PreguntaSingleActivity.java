@@ -29,6 +29,7 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 	private TextView tiempo;
 	private Timer timer;
 	private final static int DURACION = 30;
+	private String genero;
 	
 
 	@Override
@@ -49,6 +50,7 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 	}
 
 	private void iniciarJuego() {
+		genero = getIntent().getExtras().getString("genero");
 		List<Song> canciones = getCanciones();
 		if (canciones != null) {
 			cancionElegida = canciones.get(new Random().nextInt(3));
@@ -70,9 +72,9 @@ public class PreguntaSingleActivity extends Activity implements OnClickListener 
 			List<Song> canciones = new ArrayList<Song>();
 
 			while (canciones.size() < 4) {
-				Song song = dao.getGenreRandomSong("Rock");
+				Song song = dao.getGenreRandomSong(genero);
 				while (isArtistaRepetido(canciones, song.getArtista()))
-					song = dao.getGenreRandomSong("Rock");
+					song = dao.getGenreRandomSong(genero);
 				canciones.add(song);
 			}
 			return canciones;

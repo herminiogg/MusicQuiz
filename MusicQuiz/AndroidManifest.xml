@@ -43,6 +43,7 @@
             android:screenOrientation="landscape" >
         </activity>
         <!--<activity android:name="com.ia.musicquiz.EleccionJugadoresActivity"></activity>-->
+        <activity android:name="GenreListActivity"></activity>
     </application>
 
 </manifest>
