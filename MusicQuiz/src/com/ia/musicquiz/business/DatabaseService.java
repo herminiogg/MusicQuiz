@@ -35,4 +35,10 @@ public class DatabaseService {
 		ad.setDatabase(bd);
 		return ad.getArtistList();
 	}
+	
+	public List<Song> getOtherGenreSongs(String genre, Song actual) {
+		SongDao sd = new SongDao();
+		sd.setDatabase(bd);
+		return sd.getOtherGenreSongs(genre, actual);
+	}
 }
