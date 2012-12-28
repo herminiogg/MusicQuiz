@@ -12,5 +12,6 @@
     <string name="tiempo_restante">Tiempo restante: </string>
     <string name="segundos"> s</string>
     <string name="errorbd">Error al acceder a la base de datos</string>
+    <string name="no_servidor">El servidor no está disponible en estos momentos</string>
 
 </resources>

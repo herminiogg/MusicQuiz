@@ -38,13 +38,18 @@ public class BootActivity extends ActivityFinishedOnPause {
 	}
 	
 	private boolean checkConnection() {
-		boolean estado = new NetworkChecker(this).isNetWorkActive();
-		if(!estado) {
+		NetworkChecker nt = new NetworkChecker(this);
+		boolean conexion = nt.isNetWorkActive();
+		boolean servidor = nt.isServerOnline();
+		if(!conexion) {
 			Toast.makeText(this,
 					this.getResources().getText(R.string.no_conexion),
 					Toast.LENGTH_LONG).show();
 			finish();
-		} return estado;
+		} else if(!servidor) {
+			Toast.makeText(this, this.getResources().getText(R.string.no_servidor), Toast.LENGTH_LONG).show();
+			finish();
+		} return conexion && servidor;
 	}
 
 }
