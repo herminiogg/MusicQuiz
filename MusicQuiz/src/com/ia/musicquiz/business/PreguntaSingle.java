@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.util.Log;
 
+import com.ia.musicquiz.PreguntaSingleActivity;
 import com.ia.musicquiz.persistence.dao.Song;
 
 public class PreguntaSingle {
@@ -22,9 +23,10 @@ public class PreguntaSingle {
 	private Context context;
 	private OnCompletionListener listener;
 	
-	public PreguntaSingle(String genero, Context context) {
+	public PreguntaSingle(String genero, Context context, PreguntaSingleActivity psa) {
 		this.context=context;
 		this.genero=genero;
+		this.listener = psa;
 		initCanciones();
 	}
 	

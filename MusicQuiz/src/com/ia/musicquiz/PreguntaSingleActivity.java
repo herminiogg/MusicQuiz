@@ -13,17 +13,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ia.musicquiz.business.Jugador;
 import com.ia.musicquiz.business.PreguntaSingle;
 import com.ia.musicquiz.persistence.dao.Song;
 
 public class PreguntaSingleActivity extends ActivityFinishedOnPause implements OnClickListener, OnCompletionListener {
 
 	private TextView tiempo;
+	private TextView puntuacion;
 	private Timer timer;
 	private String genero;
 	private PreguntaSingle preguntaSingle;
 	private List<Song> canciones;
 	private Button[] botones;
+	private Jugador jugador;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		setContentView(R.layout.activity_pregunta_single);
 		
 		tiempo = (TextView) this.findViewById(R.id.textTiempo);
+		puntuacion = (TextView) this.findViewById(R.id.textPuntuacion);
 		
 		botones = new Button[4];
 		botones[0] = (Button) findViewById(R.id.btOpcion1);
@@ -45,11 +49,21 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 
 	private void iniciarJuego() {
 		genero = getIntent().getExtras().getString("genero");
-		preguntaSingle = new PreguntaSingle(genero, this);
+		jugador = new Jugador();
+		postPuntuacionToUI();
+		preguntaSingle = new PreguntaSingle(genero, this, this);
 		canciones = preguntaSingle.getCanciones();
 		asignarCancionesABotones(canciones);
 		preguntaSingle.startPlayer();
 		iniciarHiloTiempoRestante();
+	}
+
+	private void postPuntuacionToUI() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getResources().getText(R.string.puntuacion));
+		sb.append(" ");
+		sb.append(String.valueOf(jugador.getPuntuacion()));
+		puntuacion.setText(sb.toString());
 	}
 
 	private void asignarCancionesABotones(List<Song> canciones) {
@@ -71,20 +85,26 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		for(int i=0; i<botones.length;i++) {
 			if(botones[i].equals(source)) {
 				if (preguntaSingle.isCorrectSong(canciones.get(i))) {
+					jugador.addPreguntaAcertada(preguntaSingle.getTiempoRestante()/1000);
+					postPuntuacionToUI();
 					Toast.makeText(this, "Bien, has acertado", Toast.LENGTH_SHORT)
 					.show();
 					reiniciarInterfaz();
-				} else
+				} else {
+					jugador.addPreguntaFallada(preguntaSingle.getTiempoRestante()/1000);
+					postPuntuacionToUI();
 					Toast.makeText(this, "Lo siento, te has confundido",
-							Toast.LENGTH_SHORT).show();				
+							Toast.LENGTH_SHORT).show();
+				}
 			}
 		}
 	}
 
 	private void reiniciarInterfaz() {
+		postPuntuacionToUI();
 		preguntaSingle.stopPlayer();
 		timer.cancel();
-		preguntaSingle = new PreguntaSingle(genero, this);
+		preguntaSingle = new PreguntaSingle(genero, this, this);
 		canciones = preguntaSingle.getCanciones();
 		asignarCancionesABotones(canciones);
 		preguntaSingle.startPlayer();
@@ -100,7 +120,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 				final int tiempoRestante = preguntaSingle.getTiempoRestante();
 				 PreguntaSingleActivity.this.runOnUiThread(new Runnable() {@Override public void run()
 				 {
-					 tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+
+					 tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
 		    					tiempoRestante/1000+getResources().getText(R.string.segundos).toString());
 				 }});
     			
