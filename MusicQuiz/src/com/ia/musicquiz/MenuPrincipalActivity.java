@@ -14,8 +14,8 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 
 		setContentView(R.layout.activity_menu_principal);
 		
-		Button boton = (Button) findViewById(R.id.btUnJugador);
-		boton.setOnClickListener(new OnClickListener() {
+		Button botonUnJugador = (Button) findViewById(R.id.btUnJugador);
+		botonUnJugador.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -24,13 +24,28 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 			}
 		});
 		
-		boton = (Button) findViewById(R.id.btSalir);
-		boton.setOnClickListener(new OnClickListener() {
+		
+		Button botonVariosJugadores = (Button) findViewById(R.id.btVariosJugadores);
+		
+		botonVariosJugadores.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent lanzarJuego = new Intent(MenuPrincipalActivity.this, SeleccionJugadores.class);
+				startActivity(lanzarJuego);
+				
+			}
+		});
+
+		botonUnJugador = (Button) findViewById(R.id.btSalir);
+		botonUnJugador.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				finish();				
 			}
 		});
+		
+		
 	}
 }
