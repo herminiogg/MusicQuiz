@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="logo_de_eii">Logo de EII</string>
-    <string name="jugar">Jugar</string>
+    <string name="unJugador">Un Jugador</string>
     <string name="salir">Salir</string>
     <string name="pregunta">¿De quién es esta canción?</string>
     <string name="no_conexion">Se necesita estar conectado a internet para usar la aplicacion</string>
@@ -15,5 +15,6 @@
     <string name="no_servidor">El servidor no está disponible en estos momentos</string>
     <string name="puntuacion">Puntuacion:  </string>
     <string name="elegir_genero">Elige un género para continuar:</string>
+    <string name="variosJugadores">Variis Jugadores</string>
 
 </resources>

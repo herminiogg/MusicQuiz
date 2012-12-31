@@ -4,22 +4,30 @@
     android:background="@drawable/menuprincipal"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btJugar"
+      <Button
+        android:id="@+id/btUnJugador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_marginTop="140dp"
-        android:text="@string/jugar" />
+        android:text="@string/unJugador" />
 
+      <Button
+          android:id="@+id/btVariosJugadores"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="60dp"
+          android:layout_marginRight="60dp"
+          android:text="@string/variosJugadores" />
+ 
     <Button
         android:id="@+id/btSalir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:text="@string/salir" />
 
 </LinearLayout>

@@ -14,7 +14,7 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 
 		setContentView(R.layout.activity_menu_principal);
 		
-		Button boton = (Button) findViewById(R.id.btJugar);
+		Button boton = (Button) findViewById(R.id.btUnJugador);
 		boton.setOnClickListener(new OnClickListener() {
 			
 			@Override
