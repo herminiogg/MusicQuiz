@@ -18,13 +18,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textPregunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="35dp"
         android:layout_marginTop="35dp"
-        android:text="@string/pregunta"
+        android:text="@string/pregunta_cancion"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout

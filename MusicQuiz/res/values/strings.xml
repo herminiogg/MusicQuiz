@@ -7,7 +7,7 @@
     <string name="logo_de_eii">Logo de EII</string>
     <string name="unJugador">Un Jugador</string>
     <string name="salir">Salir</string>
-    <string name="pregunta">¿De quién es esta canción?</string>
+    <string name="pregunta_artista">¿De quién es esta canción?</string>
     <string name="no_conexion">Se necesita estar conectado a internet para usar la aplicacion</string>
     <string name="tiempo_restante">Tiempo restante: </string>
     <string name="segundos"> s</string>
@@ -17,5 +17,6 @@
     <string name="elegir_genero">Elige un género para continuar:</string>
     <string name="variosJugadores">Varios Jugadores</string>
     <string name="title_activity_seleccion_jugadores">SeleccionJugadores</string>
+    <string name="pregunta_cancion">¿Cómo se llama esta canción?</string>
 
 </resources>
