@@ -20,5 +20,11 @@
     <string name="pregunta_cancion">¿Cómo se llama esta canción?</string>
     <string name="npregunta">Pregunta</string>
     <string name="de">de</string>
+    <string name="puntuacion_obtenida">Tu puntuación:  </string>
+    <string name="bt_compartir">Compartir mi resultado</string>
+    <string name="bt_volver_menu">Volver al menú</string>
+    <string name="compartir_en">Compartir resultado en:</string>
+    <string name="antes_compartir">¡He obtenido una puntuación de </string>
+    <string name="despues_compartir"> en la app MusicQuiz!</string>
 
 </resources>

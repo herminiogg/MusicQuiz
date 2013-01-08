@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -111,8 +112,6 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 				if (preguntaSingle.isCorrectSong(canciones.get(i))) {
 					jugador.addPreguntaAcertada(preguntaSingle.getTiempoRestante()/1000);
 					postPuntuacionToUI();
-					Toast.makeText(this, "Bien, has acertado", Toast.LENGTH_SHORT)
-					.show();
 					reiniciarInterfaz();
 				} else {
 					jugador.addPreguntaFallada(preguntaSingle.getTiempoRestante()/1000);
@@ -128,21 +127,25 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		postPuntuacionToUI();
 		preguntaSingle.stopPlayer();
 		timer.cancel();
-		tryToFinish();
-		preguntaSingle = new PreguntaSingle(genero, this, this);
-		randomizeSongTexts();
-		canciones = preguntaSingle.getCanciones();
-		asignarCancionesABotones(canciones);
-		preguntaSingle.startPlayer();
-		iniciarHiloTiempoRestante();
+		if(!tryToFinish()) {
+			preguntaSingle = new PreguntaSingle(genero, this, this);
+			randomizeSongTexts();
+			canciones = preguntaSingle.getCanciones();
+			asignarCancionesABotones(canciones);
+			preguntaSingle.startPlayer();
+			iniciarHiloTiempoRestante(); 
+		}
 	}
 	
-	private void tryToFinish() {
+	private boolean tryToFinish() {
 		if(preguntaActual>=npreguntas) {
-			//launch last activity 
-			finish();
+			Intent i = new Intent(PreguntaSingleActivity.this, LastActivity.class);
+			i.putExtra("puntuacion", jugador.getPuntuacion());
+			startActivity(i);
+			return true;
 		} preguntaActual++;
 		postCurrentQuestionToUI();
+		return false;
 	}
 
 	private void postCurrentQuestionToUI() {
