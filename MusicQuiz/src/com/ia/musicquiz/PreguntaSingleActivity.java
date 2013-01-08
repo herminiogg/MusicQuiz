@@ -26,6 +26,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 	private TextView tiempo;
 	private TextView puntuacion;
 	private TextView pregunta;
+	private TextView textPregunta;
 	private Timer timer;
 	private String genero;
 	private PreguntaSingle preguntaSingle;
@@ -33,6 +34,8 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 	private Button[] botones;
 	private Jugador jugador;
 	private TextoBoton textoBoton;
+	private int preguntaActual;
+	private int npreguntas;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		tiempo = (TextView) this.findViewById(R.id.textTiempo);
 		puntuacion = (TextView) this.findViewById(R.id.textPuntuacion);
 		pregunta = (TextView) this.findViewById(R.id.textPregunta);
+		textPregunta = (TextView) this.findViewById(R.id.textPreguntaActual);
 		
 		botones = new Button[4];
 		botones[0] = (Button) findViewById(R.id.btOpcion1);
@@ -57,8 +61,11 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 	private void iniciarJuego() {
 		randomizeSongTexts();
 		genero = getIntent().getExtras().getString("genero");
+		npreguntas = getIntent().getExtras().getInt("npreguntas");
+		preguntaActual = 1;
 		jugador = new Jugador();
 		postPuntuacionToUI();
+		postCurrentQuestionToUI();
 		preguntaSingle = new PreguntaSingle(genero, this, this);
 		canciones = preguntaSingle.getCanciones();
 		asignarCancionesABotones(canciones);
@@ -121,6 +128,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		postPuntuacionToUI();
 		preguntaSingle.stopPlayer();
 		timer.cancel();
+		tryToFinish();
 		preguntaSingle = new PreguntaSingle(genero, this, this);
 		randomizeSongTexts();
 		canciones = preguntaSingle.getCanciones();
@@ -129,6 +137,23 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		iniciarHiloTiempoRestante();
 	}
 	
+	private void tryToFinish() {
+		if(preguntaActual>=npreguntas) {
+			//launch last activity 
+			finish();
+		} preguntaActual++;
+		postCurrentQuestionToUI();
+	}
+
+	private void postCurrentQuestionToUI() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getResources().getText(R.string.npregunta));
+		sb.append(" "); sb.append(preguntaActual); sb.append(" ");
+		sb.append(getResources().getText(R.string.de));
+		sb.append(" "); sb.append(npreguntas);
+		textPregunta.setText(sb.toString());
+	}
+
 	private void iniciarHiloTiempoRestante() {
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -136,9 +161,10 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 			@Override
 			public void run() {
 				final int tiempoRestante = preguntaSingle.getTiempoRestante();
-				 PreguntaSingleActivity.this.runOnUiThread(new Runnable() {@Override public void run()
-				 {
-					 tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
+				PreguntaSingleActivity.this.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
 		    					tiempoRestante/1000+getResources().getText(R.string.segundos).toString());
 				 }});
     			

@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.ia.musicquiz.business.DatabaseService;
 
 public class GenreListActivity extends ListActivity {
+	
+	private final static int NPREGUNTAS = 15;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class GenreListActivity extends ListActivity {
 		Intent i = new Intent(GenreListActivity.this,
 				PreguntaSingleActivity.class);
 		i.putExtra("genero", seleccionado);
+		i.putExtra("npreguntas", NPREGUNTAS); //hardcoded, habrá que cambiarlo cuando se presenten más niveles 
 		startActivity(i);
 	}
 

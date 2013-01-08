@@ -1,5 +1,7 @@
 package com.ia.musicquiz;
 
+import com.ia.musicquiz.persistence.SqliteManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,10 +44,20 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 			
 			@Override
 			public void onClick(View v) {
+				cerrarBD();
 				finish();				
 			}
 		});
 		
 		
+	}
+	
+	public void onBackPressed() {
+		cerrarBD();
+		super.onBackPressed();
+	}
+	
+	private void cerrarBD() {
+		SqliteManager.closeBD();
 	}
 }
