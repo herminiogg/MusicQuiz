@@ -2,12 +2,11 @@ package com.ia.musicquiz;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +27,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 	private TextView puntuacion;
 	private TextView pregunta;
 	private TextView textPregunta;
-	private Timer timer;
+	private AsyncTask<Void, Integer, Void> timer;
 	private String genero;
 	private PreguntaSingle preguntaSingle;
 	private List<Song> canciones;
@@ -126,7 +125,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 	private void reiniciarInterfaz() {
 		postPuntuacionToUI();
 		preguntaSingle.stopPlayer();
-		timer.cancel();
+		timer.cancel(true);
 		if(!tryToFinish()) {
 			preguntaSingle = new PreguntaSingle(genero, this, this);
 			randomizeSongTexts();
@@ -158,26 +157,36 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 	}
 
 	private void iniciarHiloTiempoRestante() {
-		timer = new Timer();
-		timer.schedule(new TimerTask() {
-			
-			@Override
-			public void run() {
-				final int tiempoRestante = preguntaSingle.getTiempoRestante();
-				PreguntaSingleActivity.this.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
-		    					tiempoRestante/1000+getResources().getText(R.string.segundos).toString());
-				 }});
-    			
-			}
-		}, 1000, 1000);
+		timer = new TiempoRestanteTask();
+		timer.execute(null, null);
 	}
 
 	@Override
 	public void onCompletion(MediaPlayer mp) {
 		reiniciarInterfaz();
 	}
+	
+	public class TiempoRestanteTask extends AsyncTask<Void, Integer, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				while(preguntaSingle.getTiempoRestante()>0) {
+					publishProgress(preguntaSingle.getTiempoRestante());
+					Thread.sleep(1000);
+				}
+				
+			} catch (InterruptedException e) {
+				
+			}
+			return null;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
+					progress[0]/1000+getResources().getText(R.string.segundos).toString());
+	    }
+	}
+
 }
 

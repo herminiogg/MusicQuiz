@@ -52,7 +52,9 @@ public class PreguntaSingle {
 	}
 	
 	public int getTiempoRestante() {
-		return DURACION*1000 - mp.getCurrentPosition();
+		if(mp.isPlaying()) 
+			return DURACION*1000 - mp.getCurrentPosition();
+		else return 0;
 	}
 	
 	public boolean isCorrectSong(Song song) {
