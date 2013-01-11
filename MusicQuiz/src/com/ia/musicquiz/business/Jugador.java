@@ -1,8 +1,14 @@
 package com.ia.musicquiz.business;
 
+import java.io.Serializable;
 
-public class Jugador {
 
+public class Jugador implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int puntuacion;
 	private final static int DURACION = 30;
 	
