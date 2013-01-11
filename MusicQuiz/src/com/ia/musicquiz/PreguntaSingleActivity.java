@@ -54,6 +54,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		botones[2] = (Button) findViewById(R.id.btOpcion3);
 		botones[3] = (Button) findViewById(R.id.btOpcion4);
 		
+		
 		iniciarJuego();
 
 	}
@@ -62,8 +63,8 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		randomizeSongTexts();
 		genero = getIntent().getExtras().getString("genero");
 		npreguntas = getIntent().getExtras().getInt("npreguntas");
-		preguntaActual = 1;
-		jugador = new Jugador();
+		preguntaActual = getIntent().getExtras().getInt("preguntaActual");
+		jugador = (Jugador) getIntent().getExtras().getSerializable("jugador");
 		postPuntuacionToUI();
 		postCurrentQuestionToUI();
 		preguntaSingle = new PreguntaSingle(genero, this, this);
@@ -111,7 +112,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 				if (preguntaSingle.isCorrectSong(canciones.get(i))) {
 					jugador.addPreguntaAcertada(preguntaSingle.getTiempoRestante()/1000);
 					postPuntuacionToUI();
-					reiniciarInterfaz();
+					nextSong();
 				} else {
 					jugador.addPreguntaFallada(preguntaSingle.getTiempoRestante()/1000);
 					postPuntuacionToUI();
@@ -122,17 +123,17 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		}
 	}
 
-	private void reiniciarInterfaz() {
+	private void nextSong() {
 		postPuntuacionToUI();
 		preguntaSingle.stopPlayer();
 		timer.cancel(true);
 		if(!tryToFinish()) {
-			preguntaSingle = new PreguntaSingle(genero, this, this);
-			randomizeSongTexts();
-			canciones = preguntaSingle.getCanciones();
-			asignarCancionesABotones(canciones);
-			preguntaSingle.startPlayer();
-			iniciarHiloTiempoRestante(); 
+			Intent i = new Intent(PreguntaSingleActivity.this, PreguntaSingleActivity.class);
+			i.putExtra("jugador", jugador);
+			i.putExtra("genero", genero);
+			i.putExtra("npreguntas", npreguntas);
+			i.putExtra("preguntaActual", preguntaActual);
+			startActivity(i);
 		}
 	}
 	
@@ -143,7 +144,6 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 			startActivity(i);
 			return true;
 		} preguntaActual++;
-		postCurrentQuestionToUI();
 		return false;
 	}
 
@@ -163,7 +163,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 
 	@Override
 	public void onCompletion(MediaPlayer mp) {
-		reiniciarInterfaz();
+		nextSong();
 	}
 	
 	public class TiempoRestanteTask extends AsyncTask<Void, Integer, Void> {

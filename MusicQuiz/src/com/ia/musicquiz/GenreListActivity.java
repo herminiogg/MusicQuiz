@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ia.musicquiz.business.DatabaseService;
+import com.ia.musicquiz.business.Jugador;
 
 public class GenreListActivity extends ListActivity {
 	
@@ -41,6 +42,8 @@ public class GenreListActivity extends ListActivity {
 				PreguntaSingleActivity.class);
 		i.putExtra("genero", seleccionado);
 		i.putExtra("npreguntas", NPREGUNTAS); //hardcoded, habrá que cambiarlo cuando se presenten más niveles 
+		i.putExtra("jugador", new Jugador());
+		i.putExtra("preguntaActual", 1);
 		startActivity(i);
 	}
 
