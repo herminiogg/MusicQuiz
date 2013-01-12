@@ -20,14 +20,13 @@ public class PreguntaSingle {
 	private MediaPlayer mp;
 	private final static int DURACION = 30;
 	
-	private Context context;
 	private OnCompletionListener listener;
 	
 	public PreguntaSingle(String genero, Context context, PreguntaSingleActivity psa) {
-		this.context=context;
 		this.genero=genero;
 		this.listener = psa;
 		initCanciones();
+		mp = MediaPlayer.create(context, correcta.getUri());
 	}
 	
 	private void initCanciones() {
@@ -42,7 +41,6 @@ public class PreguntaSingle {
 	}
 	
 	public void startPlayer() {
-		mp = MediaPlayer.create(context, correcta.getUri());
 		mp.setOnCompletionListener(listener);
 		mp.start();
 	}
@@ -68,7 +66,4 @@ public class PreguntaSingle {
 		todasCanciones.add(new Random().nextInt(todasCanciones.size()+1), correcta);
 		return todasCanciones;
 	}
-	
-	
-
 }
