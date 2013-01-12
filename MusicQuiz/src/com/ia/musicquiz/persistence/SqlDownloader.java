@@ -10,7 +10,7 @@ import android.os.AsyncTask;
 
 public class SqlDownloader {
 	
-	private final static String URL = "http://dl.dropbox.com/s/sdwfzu3zootz8ra/bd.sql";
+	private final static String URL = "http://musicquiz.tk/song/bd.sql";
 	private final static String FILENAME = "bd.sql";
 
 	private Context context;
