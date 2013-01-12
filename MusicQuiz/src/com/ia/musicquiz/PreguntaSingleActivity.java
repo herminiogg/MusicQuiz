@@ -78,6 +78,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		final ProgressDialog pd = new ProgressDialog(this);
 		pd.setTitle("Cargando...");
 		pd.setMessage("Cargando siguiente canción");
+		pd.setCancelable(false);
 		pd.show();
 		new Thread() {
 			public void run() {
