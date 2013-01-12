@@ -6,6 +6,7 @@ import java.util.Random;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
@@ -46,9 +47,13 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_pregunta_single);
-
+		Typeface face = Typeface.createFromAsset(getAssets(),
+	            "fonts/font.ttf");
+	
 		tiempo = (TextView) this.findViewById(R.id.textTiempo);
+		tiempo.setTypeface(face);
 		puntuacion = (TextView) this.findViewById(R.id.textPuntuacion);
+		puntuacion.setTypeface(face);
 		pregunta = (TextView) this.findViewById(R.id.textPregunta);
 		textPregunta = (TextView) this.findViewById(R.id.textPreguntaActual);
 
@@ -99,11 +104,12 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void postPuntuacionToUI() {
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 		sb.append(getResources().getText(R.string.puntuacion));
 		sb.append(" ");
 		sb.append(String.valueOf(jugador.getPuntuacion()));
-		puntuacion.setText(sb.toString());
+		puntuacion.setText(sb.toString());*/
+		puntuacion.setText(String.valueOf(jugador.getPuntuacion()));
 	}
 
 	private void asignarCancionesABotones(List<Song> canciones) {
@@ -154,7 +160,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 			i.putExtra("jugador", jugador);
 			i.putExtra("genero", genero);
 			i.putExtra("npreguntas", npreguntas);
-			i.putExtra("preguntaActual", preguntaActual);
+			i.putExtra("preguntaActual", preguntaActual); 
 			startActivity(i);
 		}
 	}
@@ -210,9 +216,15 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 		}
 
 		protected void onProgressUpdate(Integer... progress) {
-			tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
-					progress[0]/1000+getResources().getText(R.string.segundos).toString());
+			tiempo.setText(formatearNumero(progress[0]/1000)+getResources().getText(R.string.segundos).toString());
 	    }
+		
+		private String formatearNumero(int numero) {
+			if (numero < 10)
+				return ("0" + numero);
+			else
+				return String.valueOf(numero);
+		}
 	}
 
 }

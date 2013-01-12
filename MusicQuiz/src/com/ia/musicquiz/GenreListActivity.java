@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ia.musicquiz.business.AlmacenCancionesReproducidas;
 import com.ia.musicquiz.business.DatabaseService;
 import com.ia.musicquiz.business.Jugador;
 
@@ -38,7 +37,6 @@ public class GenreListActivity extends ListActivity {
 	}
 
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		AlmacenCancionesReproducidas.getInstance().vaciarAlmacen();
 		String seleccionado = (String) getListView()
 				.getItemAtPosition(position);
 		Intent i = new Intent(GenreListActivity.this,

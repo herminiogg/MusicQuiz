@@ -1,12 +1,12 @@
 package com.ia.musicquiz;
 
-import com.ia.musicquiz.persistence.SqliteManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.ia.musicquiz.persistence.SqliteManager;
 
 public class MenuPrincipalActivity extends ActivityFullScreen {
 
@@ -16,8 +16,9 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 
 		setContentView(R.layout.activity_menu_principal);
 		
-		Button botonUnJugador = (Button) findViewById(R.id.btUnJugador);
-		botonUnJugador.setOnClickListener(new OnClickListener() {
+		
+		Button botonJugar = (Button) findViewById(R.id.btUnJugador);
+		botonJugar.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -26,21 +27,8 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 			}
 		});
 		
-		
-		Button botonVariosJugadores = (Button) findViewById(R.id.btVariosJugadores);
-		
-		botonVariosJugadores.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent lanzarJuego = new Intent(MenuPrincipalActivity.this, SeleccionJugadores.class);
-				startActivity(lanzarJuego);
-				
-			}
-		});
-
-		botonUnJugador = (Button) findViewById(R.id.btSalir);
-		botonUnJugador.setOnClickListener(new OnClickListener() {
+		Button botonSalir = (Button) findViewById(R.id.btSalir);
+		botonSalir.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

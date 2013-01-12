@@ -2,25 +2,24 @@
 <resources>
 
     <string name="app_name">MusicQuiz</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="logo_de_eii">Logo de EII</string>
-    <string name="unJugador">Un Jugador</string>
+    <string name="unJugador">Jugar</string>
     <string name="salir">Salir</string>
     <string name="pregunta_artista">¿De quién es esta canción?</string>
     <string name="no_conexion">Se necesita estar conectado a internet para usar la aplicacion</string>
-    <string name="tiempo_restante">Tiempo restante: </string>
+    <string name="tiempo_restante">Tiempo restante:</string>
     <string name="segundos"> s</string>
     <string name="errorbd">Error al acceder a la base de datos</string>
     <string name="no_servidor">El servidor no está disponible en estos momentos</string>
-    <string name="puntuacion">Puntuación:  </string>
+    <string name="puntuacion">Puntuación:</string>
     <string name="elegir_genero">Elige un género para continuar:</string>
     <string name="variosJugadores">Varios Jugadores</string>
     <string name="title_activity_seleccion_jugadores">SeleccionJugadores</string>
     <string name="pregunta_cancion">¿Cómo se llama esta canción?</string>
     <string name="npregunta">Pregunta</string>
     <string name="de">de</string>
-    <string name="puntuacion_obtenida">Tu puntuación:  </string>
+    <string name="puntuacion_obtenida">Tu puntuación:</string>
     <string name="bt_compartir">Compartir mi resultado</string>
     <string name="bt_volver_menu">Volver al menú</string>
     <string name="compartir_en">Compartir resultado en:</string>

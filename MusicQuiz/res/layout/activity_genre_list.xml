@@ -13,6 +13,7 @@
         android1:layout_alignParentTop="true"
         android1:background="#2175bc"
         android1:gravity="center_vertical"
+        android1:paddingLeft="20dp"
         android1:text="@string/elegir_genero"
         android1:textAppearance="?android:attr/textAppearanceLarge"
         android1:textColor="#FFFFFF" />
@@ -22,7 +23,8 @@
         android1:layout_width="match_parent"
         android1:layout_height="match_parent"
         android1:layout_alignParentLeft="true"
-        android1:layout_below="@+id/textElegir" >
+        android1:layout_below="@+id/textElegir"
+        android1:layout_margin="10dp" >
 
     </ListView>
     
