@@ -3,6 +3,7 @@ package com.ia.musicquiz;
 import java.util.List;
 import java.util.Random;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -70,8 +71,21 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements O
 		preguntaSingle = new PreguntaSingle(genero, this, this);
 		canciones = preguntaSingle.getCanciones();
 		asignarCancionesABotones(canciones);
-		preguntaSingle.startPlayer();
-		iniciarHiloTiempoRestante();
+		startMediaPlayer();
+	}
+
+	private void startMediaPlayer() {
+		final ProgressDialog pd = new ProgressDialog(this);
+		pd.setTitle("Cargando...");
+		pd.setMessage("Cargando siguiente canción");
+		pd.show();
+		new Thread() {
+			public void run() {
+				preguntaSingle.startPlayer();
+				iniciarHiloTiempoRestante();
+				pd.dismiss();	
+			}
+		}.start();
 	}
 	
 	private void randomizeSongTexts() {
