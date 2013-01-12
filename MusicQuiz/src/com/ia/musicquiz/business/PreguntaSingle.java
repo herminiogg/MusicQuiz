@@ -16,17 +16,20 @@ public class PreguntaSingle {
 
 	private String genero;
 	private Song correcta;
+	private int indexCancionCorrecta;
 	private List<Song> incorrectas;
+	private List<Song> canciones;
 	private MediaPlayer mp;
 	private final static int DURACION = 30;
 	
+	private Context context;
 	private OnCompletionListener listener;
 	
 	public PreguntaSingle(String genero, Context context, PreguntaSingleActivity psa) {
 		this.genero=genero;
 		this.listener = psa;
+		this.context = context;
 		initCanciones();
-		mp = MediaPlayer.create(context, correcta.getUri());
 	}
 	
 	private void initCanciones() {
@@ -35,12 +38,23 @@ public class PreguntaSingle {
 			ds = new DatabaseService();
 			correcta = ds.getRandomSong(genero);
 			incorrectas = ds.getOtherGenreSongs(genero, correcta);
+			canciones = generarListaCancines();
 		} catch (Exception e) {
 			Log.e("Database", "Error al obtener cancion de la base de datos");
 		}
 	}
 	
+	private List<Song> generarListaCancines() {
+		List<Song> todasCanciones = new ArrayList<Song>(); 
+		for(Song s : incorrectas) 
+			todasCanciones.add(s);
+		indexCancionCorrecta = new Random().nextInt(todasCanciones.size()+1);
+		todasCanciones.add(indexCancionCorrecta, correcta);
+		return todasCanciones;
+	}
+	
 	public void startPlayer() {
+		mp = MediaPlayer.create(context, correcta.getUri());
 		mp.setOnCompletionListener(listener);
 		mp.start();
 	}
@@ -60,10 +74,10 @@ public class PreguntaSingle {
 	}
 	
 	public List<Song> getCanciones() {
-		List<Song> todasCanciones = new ArrayList<Song>(); 
-		for(Song s : incorrectas) 
-			todasCanciones.add(s);
-		todasCanciones.add(new Random().nextInt(todasCanciones.size()+1), correcta);
-		return todasCanciones;
+		return canciones;
+	}
+	
+	public int getIndexCancionCorrecta() {
+		return indexCancionCorrecta;
 	}
 }

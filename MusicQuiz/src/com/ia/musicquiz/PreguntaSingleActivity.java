@@ -2,10 +2,10 @@ package com.ia.musicquiz;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
@@ -16,13 +16,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ia.musicquiz.business.InicializarCancionesTask;
 import com.ia.musicquiz.business.Jugador;
 import com.ia.musicquiz.business.PreguntaSingle;
 import com.ia.musicquiz.business.TextoBoton;
 import com.ia.musicquiz.business.TextoBotonArtista;
 import com.ia.musicquiz.business.TextoBotonCancion;
-import com.ia.musicquiz.business.TiempoRestanteThread;
 import com.ia.musicquiz.persistence.dao.Song;
 
 public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
@@ -33,6 +31,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	private TextView pregunta;
 	private TextView textPregunta;
 	private String genero;
+	private AsyncTask<Void, Integer, Void> timer;
 	private PreguntaSingle preguntaSingle;
 	private List<Song> canciones;
 	private Button[] botones;
@@ -40,9 +39,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	private TextoBoton textoBoton;
 	private int preguntaActual;
 	private int npreguntas;
-	private List<PreguntaSingle> preguntasSingle;
-	private TiempoRestanteThread tiempoRestanteThread;
-	private AsyncTask<Object, Integer, List<PreguntaSingle>> inicializarCancionesTask;
+	private boolean acierto = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,58 +57,37 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 		botones[1] = (Button) findViewById(R.id.btOpcion2);
 		botones[2] = (Button) findViewById(R.id.btOpcion3);
 		botones[3] = (Button) findViewById(R.id.btOpcion4);
-		tiempoRestanteThread = new TiempoRestanteThread(getResources().getText(
-				R.string.tiempo_restante).toString(), tiempo, getResources()
-				.getText(R.string.segundos).toString());
-		tiempoRestanteThread.start();
-		inicializarDatos();
+		iniciarJuego();
 	}
 
 
-	private void inicializarDatos() {
-		
+	private void iniciarJuego() {
+		randomizeSongTexts();
 		genero = getIntent().getExtras().getString("genero");
 		npreguntas = getIntent().getExtras().getInt("npreguntas");
 		preguntaActual = getIntent().getExtras().getInt("preguntaActual");
 		jugador = (Jugador) getIntent().getExtras().getSerializable("jugador");
-		
-		ProgressDialog pd = new ProgressDialog(this);
-		pd.setTitle("Cargando canciones...");
-		pd.setMessage("Se están cargando las canciones. Cargadas: 0 de " + npreguntas);
-		inicializarCancionesTask = new InicializarCancionesTask(this, genero,
-				npreguntas, pd);
-		inicializarCancionesTask.execute(this);
+		postPuntuacionToUI();
+		postCurrentQuestionToUI();
+		preguntaSingle = new PreguntaSingle(genero, this, this);
+		canciones = preguntaSingle.getCanciones();
+		asignarCancionesABotones(canciones);
+		startMediaPlayer();
+	}
+
+	private void startMediaPlayer() {
+		final ProgressDialog pd = new ProgressDialog(this);
+		pd.setTitle("Cargando...");
+		pd.setMessage("Cargando canción...");
+		pd.setCancelable(false);
 		pd.show();
-	}
-	
-	
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if(hasFocus) 
-			iniciarJuego();
-	}
-
-
-	public void iniciarJuego() {
-		try {
-			randomizeSongTexts();
-			postPuntuacionToUI();
-			postCurrentQuestionToUI();
-			preguntasSingle = inicializarCancionesTask.get();
-			preguntaSingle = preguntasSingle.get(preguntaActual - 1);
-			canciones = preguntaSingle.getCanciones();
-			asignarCancionesABotones(canciones);
-			preguntaSingle.startPlayer();
-			iniciarHiloTiempoRestante();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		new Thread() {
+			public void run() {
+				preguntaSingle.startPlayer();
+				iniciarHiloTiempoRestante();
+				pd.dismiss();	
+			}
+		}.start();
 	}
 
 	private void randomizeSongTexts() {
@@ -152,11 +128,14 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 					jugador.addPreguntaAcertada(preguntaSingle
 							.getTiempoRestante() / 1000);
 					postPuntuacionToUI();
+					botones[i].setBackgroundColor(Color.GREEN);
+					acierto = true;
 					nextSong();
 				} else {
 					jugador.addPreguntaFallada(preguntaSingle
 							.getTiempoRestante() / 1000);
 					postPuntuacionToUI();
+					botones[i].setBackgroundColor(Color.RED);
 					Toast.makeText(this, "Lo siento, te has confundido",
 							Toast.LENGTH_SHORT).show();
 				}
@@ -165,22 +144,23 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void nextSong() {
-		tiempoRestanteThread.pausar();
+		if (!acierto)
+			botones[preguntaSingle.getIndexCancionCorrecta()].setBackgroundColor(Color.GREEN);
 		postPuntuacionToUI();
 		preguntaSingle.stopPlayer();
-		if (!tryToFinish()) {
-			preguntaSingle = preguntasSingle.get(preguntaActual - 1);
-			canciones = preguntaSingle.getCanciones();
-			asignarCancionesABotones(canciones);
-			preguntaSingle.startPlayer();
-			iniciarHiloTiempoRestante();
+		timer.cancel(true);
+		if(!tryToFinish()) {
+			Intent i = new Intent(PreguntaSingleActivity.this, PreguntaSingleActivity.class);
+			i.putExtra("jugador", jugador);
+			i.putExtra("genero", genero);
+			i.putExtra("npreguntas", npreguntas);
+			i.putExtra("preguntaActual", preguntaActual);
+			startActivity(i);
 		}
-
 	}
 
 	private boolean tryToFinish() {
 		if (preguntaActual >= npreguntas) {
-			tiempoRestanteThread.isRunning(false);
 			Intent i = new Intent(PreguntaSingleActivity.this,
 					LastActivity.class);
 			i.putExtra("puntuacion", jugador.getPuntuacion());
@@ -204,13 +184,35 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void iniciarHiloTiempoRestante() {
-		tiempoRestanteThread.start(preguntaSingle);
+		timer = new TiempoRestanteTask();
+		timer.execute(null, null);
 	}
 
 	@Override
 	public void onCompletion(MediaPlayer mp) {
 		nextSong();
 	}
+	
+	public class TiempoRestanteTask extends AsyncTask<Void, Integer, Void> {
 
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				while(preguntaSingle.getTiempoRestante()>0) {
+					publishProgress(preguntaSingle.getTiempoRestante());
+					Thread.sleep(1000);
+				}
+
+			} catch (InterruptedException e) {
+
+			}
+			return null;
+		}
+
+		protected void onProgressUpdate(Integer... progress) {
+			tiempo.setText(getResources().getText(R.string.tiempo_restante).toString()+ " " +
+					progress[0]/1000+getResources().getText(R.string.segundos).toString());
+	    }
+	}
 
 }
