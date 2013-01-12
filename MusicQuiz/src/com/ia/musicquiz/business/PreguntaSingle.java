@@ -36,15 +36,18 @@ public class PreguntaSingle {
 		DatabaseService ds;
 		try {
 			ds = new DatabaseService();
-			correcta = ds.getRandomSong(genero);
+			do {
+				correcta = ds.getRandomSong(genero);
+			} while (AlmacenCancionesReproducidas.getInstance().contiene(correcta));
+			AlmacenCancionesReproducidas.getInstance().addCancion(correcta);
 			incorrectas = ds.getOtherGenreSongs(genero, correcta);
-			canciones = generarListaCancines();
+			canciones = generarListaCanciones();
 		} catch (Exception e) {
 			Log.e("Database", "Error al obtener cancion de la base de datos");
 		}
 	}
 	
-	private List<Song> generarListaCancines() {
+	private List<Song> generarListaCanciones() {
 		List<Song> todasCanciones = new ArrayList<Song>(); 
 		for(Song s : incorrectas) 
 			todasCanciones.add(s);
