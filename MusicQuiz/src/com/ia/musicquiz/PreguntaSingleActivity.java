@@ -11,9 +11,13 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +60,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 		puntuacion.setTypeface(face);
 		pregunta = (TextView) this.findViewById(R.id.textPregunta);
 		textPregunta = (TextView) this.findViewById(R.id.textPreguntaActual);
-
+        ImageButton img = new ImageButton(this);
 		botones = new Button[4];
 		botones[0] = (Button) findViewById(R.id.btOpcion1);
 		botones[1] = (Button) findViewById(R.id.btOpcion2);
@@ -142,8 +146,15 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 							.getTiempoRestante() / 1000);
 					postPuntuacionToUI();
 					botones[i].setBackgroundColor(Color.RED);
-					Toast.makeText(this, "Lo siento, te has confundido",
-							Toast.LENGTH_SHORT).show();
+					
+					Toast toast = Toast.makeText(getApplicationContext(),
+							   "¡Oops! Vuelve a intentarlo", Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							LinearLayout toastView = (LinearLayout) toast.getView();
+							ImageView imageCodeProject = new ImageView(getApplicationContext());
+							imageCodeProject.setImageResource(R.drawable.errorimage);
+							toastView.addView(imageCodeProject, 0);
+							toast.show();
 				}
 			}
 		}

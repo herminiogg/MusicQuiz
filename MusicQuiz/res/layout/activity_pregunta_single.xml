@@ -2,13 +2,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="6dp"
-        android:background="@drawable/backgroundpregunta"
+        android:background="@drawable/background"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textPreguntaActual"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:text="@string/npregunta"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -24,6 +25,8 @@
             android:orientation="vertical" >
 
             <TextView
+                        android:textColor="@android:color/white"
+                
                 android:id="@+id/textTitlePuntuacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -32,6 +35,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
+                        android:textColor="@android:color/white"
+                
                 android:id="@+id/textPuntuacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -48,6 +53,8 @@
             android:orientation="vertical" >
 
             <TextView
+                        android:textColor="@android:color/white"
+                
                 android:id="@+id/textTitleTiempo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -56,6 +63,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             
             <TextView
+                        android:textColor="@android:color/white"
+                
                 android:id="@+id/textTiempo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -68,6 +77,8 @@
     </LinearLayout>
 
     <TextView
+                android:textColor="@android:color/white"
+        
         android:id="@+id/textPregunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
