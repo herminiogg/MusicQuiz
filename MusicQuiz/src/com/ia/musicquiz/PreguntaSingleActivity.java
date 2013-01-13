@@ -149,16 +149,6 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 							.getTiempoRestante() / 1000);
 					postPuntuacionToUI();
 					botones[i].setBackgroundResource(R.drawable.botonerror);
-
-					
-					Toast toast = Toast.makeText(getApplicationContext(),
-							   "¡Oops! Vuelve a intentarlo", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							LinearLayout toastView = (LinearLayout) toast.getView();
-							ImageView imageCodeProject = new ImageView(getApplicationContext());
-							imageCodeProject.setImageResource(R.drawable.errorimage);
-							toastView.addView(imageCodeProject, 0);
-							toast.show();
 				}
 			}
 		}
