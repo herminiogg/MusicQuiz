@@ -58,4 +58,10 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 	private void cerrarBD() {
 		SqliteManager.closeBD();
 	}
+	
+	@Override
+	protected void onStop() {
+		SqliteManager.closeBD();
+		super.onStop();
+	}
 }

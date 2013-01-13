@@ -19,18 +19,18 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:textColor="@android:color/white"
         android:background="@drawable/customboton"
-        android:text="@string/bt_compartir" />
+        android:text="@string/bt_compartir"
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/btVolverMenu"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:textColor="@android:color/white"
         android:background="@drawable/customboton"
-        android:text="@string/bt_volver_menu" />
+        android:text="@string/bt_volver_menu"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/textPuntuacion"
