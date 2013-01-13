@@ -71,11 +71,11 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 
 
 	private void iniciarJuego() {
-		randomizeSongTexts();
 		genero = getIntent().getExtras().getString("genero");
 		npreguntas = getIntent().getExtras().getInt("npreguntas");
 		preguntaActual = getIntent().getExtras().getInt("preguntaActual");
 		jugador = (Jugador) getIntent().getExtras().getSerializable("jugador");
+		randomizeSongTexts();
 		postPuntuacionToUI();
 		postCurrentQuestionToUI();
 		preguntaSingle = new PreguntaSingle(genero, this, this);
@@ -100,7 +100,7 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void randomizeSongTexts() {
-		if(String.valueOf(genero).compareTo("Bandas Sonoras")==0) {
+		if(genero.equals("Bandas Sonoras")) {
 			TextoBoton tb =  new TextoBotonBandaSonora(this);
 			pregunta.setText(tb.getQuestionText());
 			pregunta.setTextSize(25);

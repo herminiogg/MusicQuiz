@@ -22,7 +22,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/customboton"
         android:text="@string/bt_compartir"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/btVolverMenu"
@@ -31,6 +31,14 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/customboton"
         android:text="@string/bt_volver_menu"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="90sp" />
 
 </LinearLayout>
