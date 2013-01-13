@@ -100,13 +100,12 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void randomizeSongTexts() {
-		if(genero != "Bandas Sonoras"){
+		if(String.valueOf(genero).compareTo("Bandas Sonoras")==0) {
 			TextoBoton tb =  new TextoBotonBandaSonora(this);
 			pregunta.setText(tb.getQuestionText());
 			pregunta.setTextSize(25);
 			textoBoton = tb;
-		}
-		else{
+		} else {
 			TextoBoton[] tb = { new TextoBotonArtista(this),
 					new TextoBotonCancion(this) };
 			TextoBoton escogido = tb[new Random().nextInt(2)];
@@ -117,11 +116,6 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void postPuntuacionToUI() {
-		/*StringBuilder sb = new StringBuilder();
-		sb.append(getResources().getText(R.string.puntuacion));
-		sb.append(" ");
-		sb.append(String.valueOf(jugador.getPuntuacion()));
-		puntuacion.setText(sb.toString());*/
 		puntuacion.setText(String.valueOf(jugador.getPuntuacion()));
 	}
 
