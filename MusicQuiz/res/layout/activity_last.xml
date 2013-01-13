@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 
@@ -14,6 +14,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
 
+    <TextView
+        android:id="@+id/textPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="90sp" />
+    
     <Button
         android:id="@+id/btCompartir"
         android:layout_width="300dp"
@@ -32,12 +40,6 @@
         android:background="@drawable/customboton"
         android:text="@string/bt_volver_menu" />
 
-    <TextView
-        android:id="@+id/textPuntuacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white"
-        android:textSize="90sp" />
+    
 
 </LinearLayout>
