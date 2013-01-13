@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public class SqlDownloader {
-	
+	// Direción del SQL donde se almacena la información de las canciones 
 	private final static String URL = "http://musicquiz.tk/song/bd.sql";
 	private final static String FILENAME = "bd.sql";
 
