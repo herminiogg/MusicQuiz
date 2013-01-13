@@ -11,4 +11,22 @@
         android:contentDescription="@string/logo_de_eii"
         android:src="@drawable/boot" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/creadores"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#7d7d7d" />
+
+    </LinearLayout>
+
 </FrameLayout>

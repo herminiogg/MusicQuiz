@@ -19,7 +19,7 @@ public class BootActivity extends ActivityFinishedOnPause {
 
 		setContentView(R.layout.activity_boot);
 		actualizacion = Toast.makeText(BootActivity.this,
-				"Se ha actualizado la base de datos.", Toast.LENGTH_SHORT);
+				this.getResources().getText(R.string.aviso_actualizacion), Toast.LENGTH_SHORT);
 		iniciarJuego();
 	}
 

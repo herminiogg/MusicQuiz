@@ -32,5 +32,7 @@
     <string name="title_activity_puntuaciones">PuntuacionesActivity</string>
     <string name="nombre">Nombre:</string>
     <string name="mejores_puntuaciones">Mejores Puntuaciones</string>
+    <string name="aviso_actualizacion">Se ha actualizado la base de datos.</string>
+    <string name="creadores">Aplicación desarrollada por:\nHerminio García Gonzalez\nDaniel Meana Llorián\nEduardo Parrado Puente</string>
 
 </resources>
