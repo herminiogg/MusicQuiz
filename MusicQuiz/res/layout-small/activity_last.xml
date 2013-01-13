@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/lastactback"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="80sp" />
+
+    <Button
+        android:id="@+id/btCompartir"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customboton"
+        android:text="@string/bt_compartir"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/btPuntuacion"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/customboton"
+        android:text="@string/verPuntuaciones"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/btVolver"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/customboton"
+        android:text="@string/bt_volver_menu"
+        android:textColor="@android:color/black" />
+
+</LinearLayout>
