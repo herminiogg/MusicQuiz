@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginLeft="60dp"
-    android:layout_marginRight="60dp"
+
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical" >
@@ -15,6 +14,24 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
 
+    <Button
+        android:id="@+id/btCompartir"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/customboton"
+        android:text="@string/bt_compartir" />
+
+    <Button
+        android:id="@+id/btVolverMenu"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/customboton"
+        android:text="@string/bt_volver_menu" />
+
     <TextView
         android:id="@+id/textPuntuacion"
         android:layout_width="wrap_content"
@@ -22,19 +39,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
         android:textSize="90sp" />
-
-    <Button
-        android:id="@+id/btCompartir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customboton"
-        android:text="@string/bt_compartir" />
-
-    <Button
-        android:id="@+id/btVolverMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customboton"
-        android:text="@string/bt_volver_menu" />
 
 </LinearLayout>
