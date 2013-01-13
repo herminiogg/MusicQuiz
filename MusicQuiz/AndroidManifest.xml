@@ -44,6 +44,10 @@
             android:name="LastActivity"
             android:screenOrientation="landscape">
         </activity>
+        <activity
+            android:name="com.ia.musicquiz.PuntuacionesActivity"
+            android:screenOrientation="landscape" >
+        </activity>        
     </application>
 
 </manifest>
