@@ -18,38 +18,41 @@ public class BootActivity extends ActivityFinishedOnPause {
 	}
 
 	public void iniciarJuego() {
-		if(checkConnection()) {
-			SqliteManager.initBD(this);
+		if (checkConnection()) {
 			Thread splashThread = new Thread() {
 				@Override
 				public void run() {
 					try {
+						SqliteManager.initBD(BootActivity.this);
 						sleep(3000);
 					} catch (InterruptedException e) {
 					} finally {
-						Intent ventanaInicial = new Intent(BootActivity.this, MenuPrincipalActivity.class);
+						Intent ventanaInicial = new Intent(BootActivity.this,
+								MenuPrincipalActivity.class);
 						startActivity(ventanaInicial);
 					}
 				}
 			};
 			splashThread.start();
-			
 		}
 	}
-	
+
 	private boolean checkConnection() {
 		NetworkChecker nt = new NetworkChecker(this);
 		boolean conexion = nt.isNetWorkActive();
 		boolean servidor = nt.isServerOnline();
-		if(!conexion) {
+		if (!conexion) {
 			Toast.makeText(this,
 					this.getResources().getText(R.string.no_conexion),
 					Toast.LENGTH_LONG).show();
 			finish();
-		} else if(!servidor) {
-			Toast.makeText(this, this.getResources().getText(R.string.no_servidor), Toast.LENGTH_LONG).show();
+		} else if (!servidor) {
+			Toast.makeText(this,
+					this.getResources().getText(R.string.no_servidor),
+					Toast.LENGTH_LONG).show();
 			finish();
-		} return conexion && servidor;
+		}
+		return conexion && servidor;
 	}
 
 }
