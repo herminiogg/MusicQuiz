@@ -2,7 +2,6 @@ package com.ia.musicquiz;
 
 import java.util.List;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -47,9 +46,6 @@ public class PuntuacionesActivity extends ActivityFinishedOnPause {
 
 			puntos.setTextSize(30);
 			nombre.setTextSize(30);
-
-			puntos.setTextColor(Color.WHITE);
-			nombre.setTextColor(Color.WHITE);
 
 			puntos.setGravity(Gravity.CENTER);
 
