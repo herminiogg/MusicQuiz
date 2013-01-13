@@ -21,7 +21,6 @@
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,10 +35,6 @@
         <activity
             android:name="com.ia.musicquiz.GenreListActivity"
             android:screenOrientation="landscape" >
-        </activity>
-        <activity
-            android:name="com.ia.musicquiz.SeleccionJugadores"
-            android:label="@string/title_activity_seleccion_jugadores" >
         </activity>
         <activity
             android:name="com.ia.musicquiz.LastActivity"
