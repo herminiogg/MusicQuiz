@@ -2,21 +2,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="6dp"
-        android:background="@drawable/background"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textPreguntaActual"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
         android:gravity="center"
         android:text="@string/npregunta"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:baselineAligned="false">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,25 +26,22 @@
             android:orientation="vertical" >
 
             <TextView
-                        android:textColor="@android:color/white"
-                
                 android:id="@+id/textTitlePuntuacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/puntuacion"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
 
             <TextView
-                        android:textColor="@android:color/white"
-                
                 android:id="@+id/textPuntuacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
                 android:textSize="40sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -53,32 +51,26 @@
             android:orientation="vertical" >
 
             <TextView
-                        android:textColor="@android:color/white"
-                
                 android:id="@+id/textTitleTiempo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/tiempo_restante"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
+
             <TextView
-                        android:textColor="@android:color/white"
-                
                 android:id="@+id/textTiempo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium" 
-                 android:textSize="40sp" />
-
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
-                android:textColor="@android:color/white"
-        
         android:id="@+id/textPregunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,6 +79,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/pregunta_cancion"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -97,14 +90,15 @@
             android:id="@+id/btOpcion1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/botonsincontestar" />
 
         <Button
             android:id="@+id/btOpcion2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
-
+            android:layout_weight="1"
+            android:background="@drawable/botonsincontestar" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,14 +109,15 @@
             android:id="@+id/btOpcion3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/botonsincontestar" />
 
         <Button
             android:id="@+id/btOpcion4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
-
+            android:layout_weight="1"
+            android:background="@drawable/botonsincontestar" />
     </LinearLayout>
 
 </LinearLayout>

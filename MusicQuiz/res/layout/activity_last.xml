@@ -3,6 +3,7 @@
     android:layout_height="fill_parent"
     android:layout_marginLeft="60dp"
     android:layout_marginRight="60dp"
+    android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical" >
 
@@ -11,25 +12,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/puntuacion_obtenida"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
     <TextView
         android:id="@+id/textPuntuacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
         android:textSize="90sp" />
 
     <Button
         android:id="@+id/btCompartir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/customboton"
         android:text="@string/bt_compartir" />
 
     <Button
         android:id="@+id/btVolverMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/customboton"
         android:text="@string/bt_volver_menu" />
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
@@ -138,14 +139,15 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 					jugador.addPreguntaAcertada(preguntaSingle
 							.getTiempoRestante() / 1000);
 					postPuntuacionToUI();
-					botones[i].setBackgroundColor(Color.GREEN);
+					botones[i].setBackgroundResource(R.drawable.botonacierto);
 					acierto = true;
 					nextSong();
 				} else {
 					jugador.addPreguntaFallada(preguntaSingle
 							.getTiempoRestante() / 1000);
 					postPuntuacionToUI();
-					botones[i].setBackgroundColor(Color.RED);
+					botones[i].setBackgroundResource(R.drawable.botonerror);
+
 					
 					Toast toast = Toast.makeText(getApplicationContext(),
 							   "¡Oops! Vuelve a intentarlo", Toast.LENGTH_LONG);

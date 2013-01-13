@@ -9,24 +9,36 @@
         android:layout_width="480dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:contentDescription="@string/app_name" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btUnJugador"
         android:layout_width="480dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-       android:layout_marginTop="80dp"
-        android:src="@drawable/btjuego" />
+        android:layout_marginTop="70dp"
+        android:background="@drawable/customboton"
+        android:text="@string/emepzar" />
 
-    <ImageButton
+    <Button
+        android:id="@+id/btVerPuntuacionMP"
+        android:layout_width="390dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customboton"
+        android:text="@string/verPuntuaciones" />
+
+    <Button
         android:id="@+id/btSalir"
         android:layout_width="350dp"
         android:layout_height="45dp"
-         android:layout_marginLeft="100dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginRight="120dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/salir" />
-      
- 
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customboton"
+        android:text="@string/salir" />
+
 </LinearLayout>

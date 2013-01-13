@@ -25,5 +25,7 @@
     <string name="compartir_en">Compartir resultado en:</string>
     <string name="antes_compartir">¡He obtenido una puntuación de </string>
     <string name="despues_compartir"> en la app MusicQuiz!</string>
+    <string name="emepzar">Emepezar un Juego</string>
+    <string name="verPuntuaciones">Ver Puntuaciones</string>
 
 </resources>

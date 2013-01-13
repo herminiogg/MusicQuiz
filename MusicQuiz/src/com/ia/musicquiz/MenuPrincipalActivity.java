@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.ia.musicquiz.persistence.SqliteManager;
 
@@ -18,7 +17,7 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 		setContentView(R.layout.activity_menu_principal);
 		
 		
-		ImageButton botonJugar = (ImageButton) findViewById(R.id.btUnJugador);
+	   Button botonJugar = (Button) findViewById(R.id.btUnJugador);
 		botonJugar.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -28,7 +27,7 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 			}
 		});
 		
-		ImageButton botonSalir = (ImageButton) findViewById(R.id.btSalir);
+		Button botonSalir = (Button) findViewById(R.id.btSalir);
 		botonSalir.setOnClickListener(new OnClickListener() {
 			
 			@Override
