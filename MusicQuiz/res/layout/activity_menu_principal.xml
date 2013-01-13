@@ -1,26 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/menuprincipal"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
-      <Button
-          android:id="@+id/btUnJugador"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginLeft="80dp"
-          android:layout_marginRight="80dp"
-          android:layout_marginTop="175dp"
-          android:text="@string/unJugador" />
- 
-    <Button
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="480dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
+
+    <ImageButton
+        android:id="@+id/btUnJugador"
+        android:layout_width="480dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+       android:layout_marginTop="80dp"
+        android:src="@drawable/btjuego" />
+
+    <ImageButton
         android:id="@+id/btSalir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+         android:layout_marginLeft="100dp"
         android:layout_marginRight="120dp"
         android:layout_marginTop="20dp"
-        android:text="@string/salir" />
-
+        android:src="@drawable/salir" />
+      
+ 
 </LinearLayout>
