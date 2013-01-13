@@ -9,16 +9,17 @@
         android:id="@+id/textPuntuacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:layout_marginLeft="14dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/black"
-        android:textSize="80sp" />
+        android:textSize="90sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginTop="300dp" 
+        android:layout_marginTop="100dp" 
         >
 
         <Button
