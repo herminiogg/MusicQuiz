@@ -1,18 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-
-    android:background="@drawable/background"
+    android:background="@drawable/lastactback"
     android:gravity="center"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textTitlePuntuacion"
+        android:id="@+id/textPuntuacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/puntuacion_obtenida"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="14dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="80sp" />
 
     <Button
         android:id="@+id/btCompartir"
