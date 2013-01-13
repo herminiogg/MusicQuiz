@@ -29,7 +29,7 @@ public class LastActivity extends ActivityFullScreen {
 		
 		puntuacion = getIntent().getExtras().getInt("puntuacion");
 		btCompartir = (Button) this.findViewById(R.id.btCompartir);
-		btVolver = (Button) this.findViewById(R.id.btVolverMenu);
+		btVolver = (Button) this.findViewById(R.id.btVolver);
 		textPuntuacion = (TextView) this.findViewById(R.id.textPuntuacion);
 		textPuntuacion.setTypeface(face);
 		textPuntuacion.setText(String.valueOf(puntuacion));
@@ -74,7 +74,7 @@ public class LastActivity extends ActivityFullScreen {
 			}
 		});
 		
-		Button botonPuntuaciones = (Button) findViewById(R.id.btPuntuaciones);
+		Button botonPuntuaciones = (Button) findViewById(R.id.btPuntuacion);
 		botonPuntuaciones.setOnClickListener(new OnClickListener() {
 			
 			@Override
