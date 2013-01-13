@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -40,10 +41,14 @@
             android:name="com.ia.musicquiz.SeleccionJugadores"
             android:label="@string/title_activity_seleccion_jugadores" >
         </activity>
-        <activity 
-            android:name="LastActivity"
-            android:screenOrientation="landscape">
+        <activity
+            android:name="com.ia.musicquiz.LastActivity"
+            android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name="com.ia.musicquiz.PuntuacionesActivity"
+            android:screenOrientation="landscape" >
+        </activity>    
     </application>
 
 </manifest>

@@ -37,6 +37,16 @@ public class MenuPrincipalActivity extends ActivityFullScreen {
 			}
 		});
 		
+		Button botonPuntuaciones = (Button) findViewById(R.id.btVerPuntuacionMP);
+		botonPuntuaciones.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent lanzarJuego = new Intent(MenuPrincipalActivity.this, PuntuacionesActivity.class);
+				startActivity(lanzarJuego);			
+			}
+		});
+		
 		
 	}
 	

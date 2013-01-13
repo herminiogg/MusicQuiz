@@ -1,10 +1,15 @@
 package com.ia.musicquiz;
 
+import com.ia.musicquiz.business.AlmacenPuntuaciones;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class LastActivity extends ActivityFullScreen {
@@ -27,8 +32,26 @@ public class LastActivity extends ActivityFullScreen {
 		textPuntuacion = (TextView) this.findViewById(R.id.textPuntuacion);
 		textPuntuacion.setTypeface(face);
 		textPuntuacion.setText(String.valueOf(puntuacion));
-
+		mostrarDialogoNombre();
 		loadButtonListeners();
+	}
+	
+	private void mostrarDialogoNombre() {
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Nombre"); 
+		alert.setMessage("Introduce tu nombre"); 
+		final EditText input = new EditText(this); 
+		alert.setView(input); 
+		alert.setPositiveButton("Aceptar", new  DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int whichButton) {
+		    	guardarPreferencias(input.getText().toString());
+		    }
+		});
+		alert.show();
+	}
+
+	private void guardarPreferencias(String nombre) {
+		AlmacenPuntuaciones.getInstance(this).guardarPuntuacion(nombre, puntuacion);
 	}
 
 	private void loadButtonListeners() {
