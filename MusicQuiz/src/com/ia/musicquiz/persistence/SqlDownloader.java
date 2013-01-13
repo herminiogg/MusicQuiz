@@ -41,6 +41,10 @@ public class SqlDownloader {
 	protected File getFile() {
 		return new File(context.getFilesDir(), FILENAME);
 	}
+	
+	public static String getURL() {
+		return URL;
+	}
 
 }
 
