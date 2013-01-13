@@ -26,6 +26,7 @@ import com.ia.musicquiz.business.Jugador;
 import com.ia.musicquiz.business.PreguntaSingle;
 import com.ia.musicquiz.business.TextoBoton;
 import com.ia.musicquiz.business.TextoBotonArtista;
+import com.ia.musicquiz.business.TextoBotonBandaSonora;
 import com.ia.musicquiz.business.TextoBotonCancion;
 import com.ia.musicquiz.persistence.dao.Song;
 
@@ -101,11 +102,20 @@ public class PreguntaSingleActivity extends ActivityFinishedOnPause implements
 	}
 
 	private void randomizeSongTexts() {
-		TextoBoton[] tb = { new TextoBotonArtista(this),
-				new TextoBotonCancion(this) };
-		TextoBoton escogido = tb[new Random().nextInt(2)];
-		pregunta.setText(escogido.getQuestionText());
-		textoBoton = escogido;
+		if(genero != "Bandas Sonoras"){
+			TextoBoton tb =  new TextoBotonBandaSonora(this);
+			pregunta.setText(tb.getQuestionText());
+			pregunta.setTextSize(25);
+			textoBoton = tb;
+		}
+		else{
+			TextoBoton[] tb = { new TextoBotonArtista(this),
+					new TextoBotonCancion(this) };
+			TextoBoton escogido = tb[new Random().nextInt(2)];
+			pregunta.setText(escogido.getQuestionText());
+			textoBoton = escogido;
+		}
+		
 	}
 
 	private void postPuntuacionToUI() {
