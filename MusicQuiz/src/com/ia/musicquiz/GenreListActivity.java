@@ -17,7 +17,7 @@ import com.ia.musicquiz.business.Jugador;
 
 public class GenreListActivity extends ListActivity {
 	
-	private final static int NPREGUNTAS = 3;
+	private final static int NPREGUNTAS = 10;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
